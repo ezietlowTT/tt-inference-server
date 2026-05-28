@@ -798,7 +798,7 @@ templates:
     - meta-llama/Llama-3.2-1B-Instruct
   impl: tt_transformers
   version: "0.11.1"
-  tt_metal_commit: dead000  # SENTINEL: dev/prod divergence test (was 84b4c53)
+  tt_metal_commit: 84b4c53
   vllm_commit: 222ee06
   inference_engine: VLLM
   device_model_specs:
@@ -816,7 +816,13 @@ templates:
       default_impl: true
   env_vars:
     VLLM_ALLOW_LONG_MAX_MODEL_LEN: 1
-    DEV_CATALOG_SENTINEL: "1"  # SENTINEL: visible in runtime_model_spec_*.json artifact
+    # SENTINEL: unknown to vLLM (ignored at runtime), but visible in:
+    #   1. the runtime_model_spec_*.json artifact uploaded by CI
+    #   2. the `docker run -e ...` command in the docker-server logs
+    #   3. `printenv` inside the container if the user attaches a debug shell
+    # Presence in any of these proves the dev catalog was read.
+    DEV_CATALOG_SENTINEL: "1"
+    DEV_CATALOG_BRANCH: "test_dev_yamls"
   status: FUNCTIONAL
   has_builtin_warmup: true
   metadata:
