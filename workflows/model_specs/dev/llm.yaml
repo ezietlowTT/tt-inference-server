@@ -1086,3 +1086,25 @@ templates:
   metadata:
     Qwen/Qwen2.5-Coder-32B-Instruct:
       tool_call_parser_name: hermes
+
+# SENTINEL: dev-only model, absent from prod/llm.yaml.
+# Tests that --dev-mode bootstrap unlocks dev-only entries in run.py's
+# argparse choices for --model. Mirrors the Llama-3.2-1B-Instruct template
+# (cheap N150 config) so a CI run can resolve a spec end-to-end.
+- weights:
+    - test-org/dev-only-test-model
+  impl: tt_transformers
+  version: "0.11.1"
+  tt_metal_commit: 84b4c53
+  vllm_commit: 222ee06
+  inference_engine: VLLM
+  device_model_specs:
+    - device: N150
+      max_concurrency: 32
+      max_context: 131072  # 128 * 1024
+      default_impl: true
+  env_vars:
+    VLLM_ALLOW_LONG_MAX_MODEL_LEN: 1
+    DEV_ONLY_MODEL_SENTINEL: "1"
+  status: EXPERIMENTAL
+  has_builtin_warmup: true
