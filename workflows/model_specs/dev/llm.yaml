@@ -798,7 +798,7 @@ templates:
     - meta-llama/Llama-3.2-1B-Instruct
   impl: tt_transformers
   version: "0.11.1"
-  tt_metal_commit: 84b4c53
+  tt_metal_commit: dead000  # SENTINEL: dev/prod divergence test (was 84b4c53)
   vllm_commit: 222ee06
   inference_engine: VLLM
   device_model_specs:
@@ -816,6 +816,7 @@ templates:
       default_impl: true
   env_vars:
     VLLM_ALLOW_LONG_MAX_MODEL_LEN: 1
+    DEV_CATALOG_SENTINEL: "1"  # SENTINEL: visible in runtime_model_spec_*.json artifact
   status: FUNCTIONAL
   has_builtin_warmup: true
   metadata:
