@@ -246,6 +246,27 @@ templates:
       default_impl: true
 
 - weights:
+    - yolox_nano
+  version: "0.13.0"
+  tt_metal_commit: "079a2c2"
+  impl: tt_transformers
+  min_disk_gb: 15
+  min_ram_gb: 6
+  docker_image: "ghcr.io/tenstorrent/tt-shield/tt-media-inference-server-forge:a9b09e0b611da6deb4d8972e8296148fd864e5fd_98dcf62_60920940673"
+  model_type: CNN
+  inference_engine: FORGE
+  status: COMPLETE
+  device_model_specs:
+    - device: N150
+      max_concurrency: 1
+      max_context: 65536  # 64 * 1024
+      default_impl: true
+    - device: N300
+      max_concurrency: 1
+      max_context: 65536  # 64 * 1024
+      default_impl: true
+
+- weights:
     - unet
   tt_metal_commit: "2496be4"
   impl: tt_transformers
