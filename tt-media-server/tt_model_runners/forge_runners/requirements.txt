@@ -13,3 +13,5 @@ transformers
 
 datasets # model training
 peft # model training
+
+thop # for yolox
