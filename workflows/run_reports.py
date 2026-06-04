@@ -3360,28 +3360,38 @@ def add_target_checks_cnn_image_video(
 
     # extract targets for functional, complete, target and calculate them
     target_tput_user = targets.tput_user
-    complete_tput_user = target_tput_user / 2  # Complete target is 2x slower
-    functional_tput_user = target_tput_user / 10  # Functional target is 10x slower
 
     logger.info("Calculating target checks")
+    if target_tput_user is not None:
+        complete_tput_user = target_tput_user / 2  # Complete target is 2x slower
+        functional_tput_user = target_tput_user / 10  # Functional target is 10x slower
+        functional_tput_check = 2 if tput_user > functional_tput_user else 3
+        complete_tput_check = 2 if tput_user > complete_tput_user else 3
+        target_tput_check = 2 if tput_user > target_tput_user else 3
+    else:
+        logger.warning("No tput_user target configured; skipping tput checks")
+        functional_tput_check = ReportCheckTypes.NA
+        complete_tput_check = ReportCheckTypes.NA
+        target_tput_check = ReportCheckTypes.NA
+
     target_checks = {
         "functional": {
             "latency": metrics["functional_latency"],
             "latency_ratio": metrics["functional_latency_ratio"],
             "latency_check": metrics["functional_latency_check"],
-            "tput_check": 2 if tput_user > functional_tput_user else 3,
+            "tput_check": functional_tput_check,
         },
         "complete": {
             "latency": metrics["complete_latency"],
             "latency_ratio": metrics["complete_latency_ratio"],
             "latency_check": metrics["complete_latency_check"],
-            "tput_check": 2 if tput_user > complete_tput_user else 3,
+            "tput_check": complete_tput_check,
         },
         "target": {
             "latency": metrics["target_latency"],
             "latency_ratio": metrics["target_latency_ratio"],
             "latency_check": metrics["target_latency_check"],
-            "tput_check": 2 if tput_user > target_tput_user else 3,
+            "tput_check": target_tput_check,
         },
     }
 
