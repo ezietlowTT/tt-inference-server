@@ -36,7 +36,7 @@ NUM_OF_DEVICES_KEY = "num_of_devices"
 class HealthCheckConfig:
     """Health check configuration."""
 
-    MAX_ATTEMPTS: int = 10
+    MAX_ATTEMPTS: int = 230
     RETRY_DELAY: int = 10
     TIMEOUT: int = 10
 
