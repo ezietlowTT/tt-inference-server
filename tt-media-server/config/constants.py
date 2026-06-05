@@ -1372,7 +1372,7 @@ for runner in [
         "device_ids": DeviceIds.DEVICE_IDS_1.value,
         "download_weights_from_service": False,
     }
-    ModelConfigs[(runner, DeviceTypes.N300)] = {
+    ModelConfigs[(runner, DeviceTypes.P150)] = {
         "is_galaxy": False,
         "device_mesh_shape": (1, 1),
         "device_ids": DeviceIds.DEVICE_IDS_1.value,

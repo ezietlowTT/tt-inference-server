@@ -260,7 +260,7 @@ templates:
       max_concurrency: 1
       max_context: 65536  # 64 * 1024
       default_impl: true
-    - device: N300
+    - device: P150
       max_concurrency: 1
       max_context: 65536  # 64 * 1024
       default_impl: true

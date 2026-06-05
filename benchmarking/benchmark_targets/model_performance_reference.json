@@ -6706,7 +6706,7 @@
                 }
             }
         ],
-        "n300": [
+        "p150": [
             {
                 "max_concurrency": 1,
                 "num_inference_steps": 1,

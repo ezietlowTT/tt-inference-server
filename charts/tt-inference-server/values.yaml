@@ -7269,7 +7269,7 @@ models:
                 value: wormhole_b0
               - name: MESH_DEVICE
                 value: N150
-      n300:
+      p150:
         defaultImpl: tt_transformers
         impls:
           tt_transformers:
@@ -7288,11 +7288,9 @@ models:
                 memory: 6Gi
             env:
               - name: ARCH_NAME
-                value: wormhole_b0
+                value: blackhole
               - name: MESH_DEVICE
-                value: N300
-              - name: WH_ARCH_YAML
-                value: wormhole_b0_80_arch_eth_dispatch.yaml
+                value: P150
     defaultEngine: forge
   unet:
     forge:
